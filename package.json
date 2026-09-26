@@ -5,7 +5,17 @@
   "main": "dist/how-long-till-lunch.cjs.js",
   "module": "dist/how-long-till-lunch.esm.js",
   "browser": "dist/how-long-till-lunch.umd.js",
-  "types": "dist/how-long-till-lunch.d.ts",
+  "types": "./dist/how-long-till-lunch.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./dist/how-long-till-lunch.esm.js"
+      },
+      "require": {
+        "default": "./dist/how-long-till-lunch.cjs.js"
+      }
+    }
+  },
   "scripts": {
     "build": "rollup -c rollup.config.ts --configPlugin typescript",
     "manual": "node build/build.mjs",
@@ -54,5 +64,8 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
