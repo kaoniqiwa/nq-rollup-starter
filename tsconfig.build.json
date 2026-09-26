@@ -1,0 +1,19 @@
+{
+  // 构建专用：只囊括 src/**，并把 rootDir 钉在 src。
+  // rootDir 决定 outDir 下的目录结构，钉在 src 后路径映射才是 dist/main.ts →
+  // dist/main.js，而不是多一层 dist/src/。
+  // 注意 rollup.config.ts 不在这里 —— 它一旦进入 program，rootDir 会被推断成
+  // 项目根目录，dist/src/ 那一层就又回来了。
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "dist",
+    // 声明文件交给 rollup-plugin-dts 打成单个 dist/how-long-till-lunch.d.ts。
+    // 这里必须关掉，否则 @rollup/plugin-typescript 还会逐个源文件产出
+    // main.d.ts / lunchtime.d.ts / millisecondsUntil.d.ts
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": false
+  },
+  "include": ["src/**/*"]
+}

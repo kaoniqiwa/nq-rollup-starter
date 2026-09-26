@@ -1,0 +1,22 @@
+{
+  // 基础配置：给编辑器做类型检查，以及给 `rollup -c --configPlugin typescript`
+  // 编译 rollup.config.ts 用。这里刻意不写 rootDir / outDir / declaration：
+  //   - 不写 rootDir → include 里的 rollup.config.ts 在 src/ 外面也不会报 TS6059
+  //   - 不写 declaration → 编译配置文件时不会往盘上写 .d.ts
+  // 真正的构建产物配置见 tsconfig.build.json
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"],
+    // 纯类型检查；@rollup/plugin-typescript 会强制覆盖回 false，不影响构建
+    "noEmit": true
+  },
+  "include": ["src/**/*", "rollup.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}
