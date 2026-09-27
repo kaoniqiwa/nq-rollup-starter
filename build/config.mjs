@@ -10,6 +10,7 @@ const __dirname = import.meta.dirname;
 
 const createdRequire = createRequire(import.meta.url);
 const pkg = createdRequire('../package.json');
+const external = Object.keys(pkg.dependencies ?? {});
 
 function resolve(_path) {
   return path.resolve(__dirname, '../', _path);
@@ -25,6 +26,7 @@ function getConfig(opts) {
   /**@type {import('rollup').InputOptions;} */
   const inputOptions = {
     input: 'src/main.ts',
+    external,
     plugins: [
       commonjs(),
       nodeResolve({
@@ -93,7 +95,7 @@ export default [
     env: 'development',
   },
   {
-    file: resolve(pkg.main.replace(/\.js/, '.min.js')),
+    file: resolve(pkg.main.replace(/\.cjs/, '.min.cjs')),
     format: 'cjs',
     env: 'production',
   },

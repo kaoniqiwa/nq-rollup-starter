@@ -52,7 +52,7 @@ export default defineConfig([
   // 它的 transform 会把实现剥掉，JS 产物会变成 .d.ts 的内容。
   {
     input,
-    output: { file: 'dist/how-long-till-lunch.d.ts', format: 'es' },
+    output: [{ file: 'dist/how-long-till-lunch.d.ts', format: 'es' }],
     plugins: [dts()],
   },
 ]);
